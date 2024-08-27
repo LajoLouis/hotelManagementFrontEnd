@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AT:ital,wght@0,100..400;1,100..400&family=Sevillana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gupter:wght@400;500;700&family=Playwrite+AT:ital,wght@0,100..400;1,100..400&family=Sevillana&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: "Playwrite AT", cursive;
+}
+td{
+    border-left: 2px solid #111827;
+    padding: 10px;
+}
+

@@ -1,0 +1,306 @@
+{
+  "hotels": [
+    {
+      "id": 1,
+      "name": "The Art Hotel",
+      "state": "Lagos",
+      "stateImage":"/images/lagosImage.jpeg",
+      "city": "Victoria Island",
+      "rating": 5,
+      "description": "We are conveniently situated in the heart of the Victoria Island Business District. Its tastefully decorated rooms, close to central banks, and Telecoms and Oil and Gas corporate office make this the perfect location for your next business trip.",
+      "hotelImage": "/images/TheArtHotelLagos.jpeg",
+      "rooms":[
+        {
+        "roomName": "KingSize",
+        "image": "/images/TheArtHotelRoom1.jpg",
+        "capacity": 3,
+        "price": 500
+      },
+      {
+        "roomName": "Presidential Suite",
+        "image": "/images/TheArtHotelRoom2.jpg",
+        "capacity": 3,
+        "price": 500
+      },
+      {
+        "roomName": "Deluxe KingSize",
+        "image": "/images/TheArtHotelRoom3.jpg",
+        "capacity": 3,
+        "price": 500
+      }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "The Delborough Hotel",
+      "state": "Lagos",
+      "stateImage":"/images/lagosImage.jpeg",
+      "city": "Victoria Island",
+      "rating": 5,
+      "description": "Welcome to the most exclusive hotel in the heart of Lagos. Designed by a team of seasoned architects, designers and connoisseurs for you to experience Ultimate Sophistication. Luxury awaits at The Delborough, where personalized stays and exquisite dining at DANI Restaurant define your experience. Elevate your moments at DANI Rooftop—an urban oasis with panoramic views. Welcome to hospitality redefined.",
+      "hotelImage": "/images/theDelboroughLagos.jpeg",
+      "rooms":[
+        {
+        "roomName": "KingSize",
+        "image": "/images/theDelboroughLagosDeluxeSingle.jpg",
+        "capacity": 3,
+        "price": 600
+      },
+      {
+        "roomName": "Presidential Suite",
+        "image": "/images/theDelboroughLagosSingleSuite.jpg",
+        "capacity": 3,
+        "price": 600
+      },
+      {
+        "roomName": "Deluxe KingSize",
+        "image": "/images/theDelboroughLagosSuperiorTwin.jpg",
+        "capacity": 3,
+        "price": 900
+      }
+      ]
+      
+    },
+    {
+      "id": 3,
+      "name": "Presken Hotel",
+      "state": "Lagos",
+      "stateImage":"/images/lagosImage.jpeg",
+      "city": "Ikeja",
+      "rating": 5,
+      "description": "Welcome to Presken Hotels and Resorts, a modern styled hospitality chain with numerous locations (Over 11) in close proximity to the Muritala Muhammed Airport (LOS) and available lodgings placed at the heart of both Ikeja, Lagos Island and the Abuja metropolis district. Our stay packages and onsite services are modestly tailored to suit both corporate and leisure guests at very best rates available.",
+      "hotelImage": "/images/Presken.jpg",
+      "rooms":[
+        {
+        "roomName": "KingSize",
+        "image": "/images/preskenroom1.jpeg",
+        "capacity": 3,
+        "price": 200
+      },
+      {
+        "roomName": "Presidential Suite",
+        "image": "/images/preskenroom2.jpeg",
+        "capacity": 3,
+        "price": 800
+      },
+      {
+        "roomName": "Deluxe KingSize",
+        "image": "/images/preskenroom3.jpeg",
+        "capacity": 3,
+        "price": 700
+      }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Aveon",
+      "state": "Abuja",
+      "stateImage":"/images/abujaImage.jpeg",
+      "city": "Guzape",
+      "rating": 5,
+      "description": "Located in Guzape Abuja, Aveon hotel provide a peaceful, private retreat in the heart of one of the world's most iconic cities in Africa. Experience a sophisticated blend of professional services and home comforts. We proudly offer a full range of complimentary amenities and services that provide you with everything you need for an inspiring stay.",
+      "hotelImage": "/images/Aveon4.jpg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/Aveon1.jpg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/Aveon2.jpg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/Aveon3.jpg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+      
+    },
+    {
+      "id": 5,
+      "name": "Plush Hotel",
+      "state": "Abuja",
+      "rating": 5,
+      "stateImage":"/images/abujaImage.jpeg",
+      "city": "Wuse",
+      "description": "A premium lifestyle hotel in the heart of Abuja, curated with today's business executive in mind. Dine, wine, stay with us to enjoy impeccable service in a truly exclusive environment.",
+      "hotelImage": "/images/plush.jpg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/plush1.jpg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/plush2.jpeg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/plush3.jpg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Mayfair Hotel",
+      "state": "Abuja",
+      "stateImage":"/images/abujaImage.jpeg",
+      "city": "Maitama",
+      "rating": 5,
+      "description": "Mayfair Hotel is one of the city's iconic escape location. This hotel features 20 rooms comprising of 3 Unique room categories. Notably, the Executive combines breathtaking aerial views of maitama with splendid and magnificent appearance.",
+      "hotelImage": "/images/mayfair.jpg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/mayfair1.jpg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/mayfair2.jpg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/mayfair3.jpg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Mayfair Hotel",
+      "state": "Abuja",
+      "stateImage":"/images/abujaImage.jpeg",
+      "city": "Maitama",
+      "rating": 5,
+      "description": "Mayfair Hotel is one of the city's iconic escape location. This hotel features 20 rooms comprising of 3 Unique room categories. Notably, the Executive combines breathtaking aerial views of maitama with splendid and magnificent appearance.",
+      "hotelImage": "/images/mayfair.jpg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/mayfair1.jpg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/mayfair2.jpg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/mayfair3.jpg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Mayfair Hotel",
+      "state": "Abuja",
+      "stateImage":"/images/abujaImage.jpeg",
+      "city": "Maitama",
+      "rating": 5,
+      "description": "Mayfair Hotel is one of the city's iconic escape location. This hotel features 20 rooms comprising of 3 Unique room categories. Notably, the Executive combines breathtaking aerial views of maitama with splendid and magnificent appearance.",
+      "hotelImage": "/images/mayfair.jpg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/mayfair1.jpg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/mayfair2.jpg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/mayfair3.jpg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Protea Hotel",
+      "state": "Imo",
+      "stateImage":"/images/Owerri.jpeg",
+      "city": "Owerri",
+      "rating": 5,
+      "description": "Protea Hotel Owerri Select is a luxury hotel located at Plot H/1 Nekede Pocket Layout, Protea Road, New Owerri, Imo State, Nigeria. The hotel offers classy accommodation to guests.",
+      "hotelImage": "/images/protea.jpeg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/protea1.jpeg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/protea2.jpg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/protea3.jpg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Unic Hotel",
+      "state": "Imo",
+      "stateImage":"/images/Owerri.jpeg",
+      "city": "Owerri",
+      "rating": 5,
+      "description": "Protea Hotel Owerri Select is a luxury hotel located at Plot H/1 Nekede Pocket Layout, Protea Road, New Owerri, Imo State, Nigeria. The hotel offers classy accommodation to guests.",
+      "hotelImage": "/images/unic.jpg",
+      "rooms":[
+        {
+          "roomName": "KingSize",
+          "image": "/images/unicroom1.jpg",
+          "capacity": 3,
+          "price": 200
+        },
+        {
+          "roomName": "Presidential Suite",
+          "image": "/images/unicroom2.jpg",
+          "capacity": 3,
+          "price": 800
+        },
+        {
+          "roomName": "Deluxe KingSize",
+          "image": "/images/unicroom3.jpeg",
+          "capacity": 3,
+          "price": 700
+        }
+      ]
+    }
+  ]
+}
