@@ -13,10 +13,16 @@ import Alert from "./components/pages/Alert";
 import BookRoom from "./components/pages/BookRoom";
 import BookingPayment from "./components/pages/BookingPayment";
 import Profile from "./components/pages/Profile";
+import { AuthProvider } from "./context/AuthContext";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
+  const { getItem } = useLocalStorage("auth-token");
+  const token = getItem();
+  let authInitialState = { accessToken: token ?? null };
   return (
     <div >
+      <AuthProvider defaultState={authInitialState}>
       <HotelProvider>
         <Router>
           <Header />
@@ -42,6 +48,7 @@ function App() {
           <Footer />
         </Router>
       </HotelProvider>
+      </AuthProvider>
     </div>
   );
 }

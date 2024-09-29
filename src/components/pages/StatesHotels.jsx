@@ -12,19 +12,23 @@ function StatesHotels() {
   const firstHotelImage =
     hotelsInState.length > 0 ? hotelsInState[0].stateImage : null;
 
+  
+  console.log(hotelsInState);
+    
+
   return (
     <div className="w-full flex justify-center ">
       <div className="w-[90%] my-[20px] flex shadow-md shadow-red-950 rounded-[10px] overflow-hidden bg-slate-100">
         <div
           className="xs:w-[0%] md:w-[40%] bg-center bg-cover "
           style={{
-            backgroundImage: `url(${firstHotelImage})`,
+            backgroundImage: `url(http://localhost:8000/${firstHotelImage})`,
             minHeight: "200px",
           }}
         ></div>
         <div className=" xs:w-full md:w-[60%] space-y-4">
           {hotelsInState.map((item) => (
-            <HotelCard item={item} key={item.id} />
+            <HotelCard item={item} key={item._id}/>
           ))}
         </div>
       </div>

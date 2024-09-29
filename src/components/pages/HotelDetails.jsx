@@ -4,27 +4,41 @@ import { useParams } from "react-router-dom";
 import HotelContext from "../../context/HotelContext";
 import BookRoom from "./BookRoom";
 import { TfiHandPointDown } from "react-icons/tfi";
+import { HiOutlineMail } from "react-icons/hi";
+import { FaPhone } from "react-icons/fa6";
+import { BsWhatsapp } from "react-icons/bs";
+import { BsFacebook } from "react-icons/bs";
+import { LuInstagram } from "react-icons/lu";
+import { FaPerson } from "react-icons/fa6";
 
 function HotelDetails() {
   // Using the parameters to find hotel chosen
   const params = useParams();
   const hotelId = params.id;
-  const { hotel, today, showAndHide, setCheckIn, setCheckOut, checkIn, checkOut } = useContext(HotelContext);
-  const specificHotel = hotel.find((item) => item.id == hotelId);
-  const [mainImage, setMainImage] = useState(specificHotel?.hotelImage);
+  const {
+    hotel,
+    today,
+    showAndHide,
+    setCheckIn,
+    setCheckOut,
+    checkIn,
+    checkOut,
+  } = useContext(HotelContext);
+  const specificHotel = hotel.find((item) => item._id == hotelId);
+  const [mainImage, setMainImage] = useState(specificHotel?.image);
   const [bookedRoom, setBookedRoom] = useState({});
 
-  const handleBooking = (room) => {
+  const handleSelection = (room) => {
     if (checkIn && checkOut !== "") {
       setBookedRoom(room);
-      showAndHide("success", `${room.roomName} chosen`)
-    }else{
-      showAndHide("error", "please input checkIn and checkOut date")
+      showAndHide("success", `${room.roomName} chosen`);
+    } else {
+      showAndHide("error", "please input checkIn and checkOut date");
     }
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-100 min-h-screen relative top-0">
       <div>
         <h1 className="text-center text-4xl font-bold text-gray-800 mb-6">
           {specificHotel?.name}
@@ -33,24 +47,24 @@ function HotelDetails() {
       <div className="md:flex w-[90%] mx-auto my-4">
         <div className="flex flex-col md:flex-row md:flex-wrap xs:flex-nowrap xs:w-[90%] md:w-[70%] m-auto justify-between shadow-lg rounded-lg bg-white overflow-hidden">
           <img
-            src={mainImage}
-            alt=""
+            src={"http://localhost:8000/" + mainImage}
+            alt={specificHotel?.name}
             className="w-full md:h-[40%] object-cover rounded-lg"
           />
           <div className="flex overflow-x-auto w-full mt-4 space-x-4 p-2 bg-gray-50 rounded-b-lg">
             {[
-              specificHotel?.hotelImage,
-              specificHotel?.rooms[0]?.image,
-              specificHotel?.rooms[1]?.image,
-              specificHotel?.rooms[2]?.image,
-              specificHotel?.rooms[0]?.image,
-              specificHotel?.rooms[1]?.image,
-              specificHotel?.rooms[2]?.image,
-              specificHotel?.hotelImage,
+              specificHotel?.image,
+              specificHotel?.rooms[0]?.roomImage,
+              specificHotel?.rooms[1]?.roomImage,
+              specificHotel?.rooms[2]?.roomImage,
+              specificHotel?.rooms[0]?.roomImage,
+              specificHotel?.rooms[1]?.roomImage,
+              specificHotel?.rooms[2]?.roomImage,
+              specificHotel?.image,
             ].map((image, index) => (
               <img
                 key={index}
-                src={image}
+                src={`http://localhost:8000/${image}`}
                 alt={`Image ${index + 1}`}
                 className="flex-shrink-0 xs:w-[43%] md:w-[22%] h-[150px] object-cover rounded-lg cursor-pointer transform hover:scale-110 transition-transform"
                 onClick={() => setMainImage(image)}
@@ -58,11 +72,66 @@ function HotelDetails() {
             ))}
           </div>
         </div>
-        <div className="md:w-[30%] mx-auto mt-6 md:mt-0 md:ml-6 p-4 bg-white shadow-lg rounded-lg">
+        <div className="xs:w-full md:w-[30%] mx-auto mt-6 md:mt-0 md:ml-6 p-4 bg-white shadow-lg rounded-lg space-y-8">
           <p className="font-bold font-Gupter text-gray-700 text-lg mb-4">
             {specificHotel?.description}
           </p>
-          <address className="text-gray-600">{specificHotel?.city}</address>
+          <address className="text-gray-600">{specificHotel?.address}</address>
+          <div className="flex flex-wrap w-full overflow-auto">
+            <HiOutlineMail className="text-2xl" />
+            <p>{specificHotel?.email}</p>
+          </div>
+          <div className="flex space-x-4">
+            <FaPhone className="text-2xl" />
+            <p>{specificHotel?.phone}</p>
+          </div>
+          <>
+            {specificHotel?.whatsapp == "" ? (
+              <div className="hidden">
+                <BsWhatsapp />
+                <p>Unavailable</p>
+              </div>
+            ) : (
+              <div className="flex p-[10px]">
+                <BsWhatsapp className="text-2xl pr-2 text-gray-900" />
+                <p>{specificHotel?.whatsapp}</p>
+              </div>
+            )}
+          </>
+          <>
+            {specificHotel?.facebook == "" ? (
+              <p className="hidden">
+                <BsFacebook />
+                Unavailable
+              </p>
+            ) : (
+              <div className="flex p-[10px]">
+                <BsFacebook className="text-2xl pr-2 text-gray-900" />
+                <p>{specificHotel?.facebook}</p>
+              </div>
+            )}
+          </>
+          <>
+            {specificHotel?.instagram == "" ? (
+              <p className="hidden">
+                <LuInstagram />
+                Unavailable
+              </p>
+            ) : (
+              <div className="flex p-[10px]">
+                <LuInstagram className="text-2xl pr-2 text-gray-900" />
+                <p>{specificHotel?.instagram}</p>
+              </div>
+            )}
+          </>
+          <h1 className="text-center font-extrabold m-[2%] underline">
+            Hotel Amenities
+          </h1>
+          <ul className="list-disc font-Gupter font-light p-[2%]">
+            {specificHotel?.amenities?.map((amenity) => (
+              <li key={amenity._id}>{amenity.name}</li>
+            ))}
+          </ul>
         </div>
       </div>
       <div className="bg-gray-900 bg-opacity-90 opacity-80 bg-center bg-cover flex flex-col items-center p-[10px]">
@@ -92,6 +161,7 @@ function HotelDetails() {
                 className="font-Gupter p-[5%] pb-2 focus:border-[1px] focus:border-stone-600 focus:outline-none "
                 required
                 min={today}
+                value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
               />
             </div>
@@ -105,6 +175,7 @@ function HotelDetails() {
                 className="font-Gupter p-[5%] pb-2 focus:border-[1px] focus:border-stone-600 focus:outline-none "
                 required
                 min={checkIn}
+                value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
               />
             </div>
@@ -113,7 +184,7 @@ function HotelDetails() {
       </div>
       <div className="flex xs:flex-col md:flex-row font-Gupter text-center relative top-0">
         <div className="xs:w-[90%]xs:m-auto md:w-[60%]">
-          {specificHotel?.rooms.map((item, index) => (
+          {specificHotel?.rooms.map((room, index) => (
             <div
               key={index}
               className=" flex md:flex-row xs:flex-col my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden"
@@ -121,17 +192,32 @@ function HotelDetails() {
               <div
                 className="xs:w-full md:w-[40%] bg-cover bg-center"
                 style={{
-                  backgroundImage: `url(${item.image})`,
+                  backgroundImage: `url("http://localhost:8000/${room.roomImage}")`,
                   minHeight: "200px",
                 }}
-              ></div>
-              <div className="xs:w-full md:w-[60%] space-y-5">
-                <h1 className="text-3xl">{item.roomName}</h1>
-                <p>Maximum Capacity: {item.capacity}</p>
-                <p>{item.price} per Night</p>
+              >
+                <img
+                  src={`http://localhost:8000/${room.roomImage}`}
+                  alt=""
+                  className="w-full h-full object-cover "
+                />
+              </div>
+              <div className="xs:w-full md:w-[60%] space-y-5 p-[15px]">
+                <h1 className="text-3xl">{room.roomName}</h1>
+                <p>{room.description}</p>
+                {/* <p>
+                  Maximum Capacity:{" "}
+                  <b className="font-extrabold text-[20px]">{room.capacity}</b>
+                </p> */}
+                <div className="flex justify-center">
+                  <p>Maximum Capacity: </p>
+                  <p>{room.capacity}</p>
+                  <FaPerson  className="text-[20px]"/>
+                </div>
+                <p>₦ {new Intl.NumberFormat('en-US').format(room.price)} / Night</p>
                 <button
                   className="bg-gray-900 p-[10px] my-[20px] text-white hover:bg-gray-800"
-                  onClick={() => handleBooking(item)}
+                  onClick={() => handleSelection(room)}
                 >
                   Choose Room
                 </button>
@@ -140,10 +226,7 @@ function HotelDetails() {
           ))}
         </div>
         <div className="xs:w-full md:w-[40%] sticky top-0 left-0">
-          <BookRoom
-            hotelName={specificHotel?.name}
-            bookedRoom={bookedRoom}
-          />
+          <BookRoom hotelName={specificHotel?.name} bookedRoom={bookedRoom} />
         </div>
       </div>
     </div>

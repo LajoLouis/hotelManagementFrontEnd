@@ -8,14 +8,57 @@ import HotelContext from "../../context/HotelContext";
 import { Link } from "react-router-dom";
 
 function BookRoom({ hotelName, bookedRoom }) {
-  const { checkIn, checkOut, showAndHide, bookingCart, handleBookingCart } = useContext(HotelContext);
+  const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart } = useContext(HotelContext);
   const [occupants, setOccupants] = useState(1);
-
+  const [paynmentStatus, setPaymentStatus] = useState(false)
 
   const checkInDate = new Date(checkIn).getTime();
   const checkOutDate = new Date(checkOut).getTime();
   const duration = checkOutDate - checkInDate;
-  const days = duration / (1000 * 60 * 60 * 24);
+  const numberOfNights = duration / (1000 * 60 * 60 * 24);
+  const bookingDate = new Date().toISOString()
+
+
+  const totalCost = bookedRoom.price
+    ? ((occupants*1/100)*bookedRoom.price) + (numberOfNights * bookedRoom.price)
+    : 0;
+
+  const formattedTotalCost = new Intl.NumberFormat('en-US').format(totalCost)
+
+  const handleRoomBooking = async()=>{
+   
+
+    // if (!bookedRoom || !bookedRoom.roomName) {
+    //   showAndHide("error", "Kindly select a room to proceed");
+    //   return;
+    // }
+    const room = bookedRoom._id
+    try {
+      const res = await fetch("http://localhost:8000/bookvialajo/makebooking",{
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+          "auth-token" : localStorage.getItem("auth-token")
+        },
+        body: JSON.stringify({room, checkIn, checkOut, numberOfNights, totalCost, occupants, bookingDate, paynmentStatus })
+      })
+
+      const data = await res.json()
+      if (data === "Input checkIn and CheckOut date") {
+        showAndHide("Please Input checkIn and checkOut date")
+      }else{
+        setBookingCart(data)
+      }
+
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  
+
+
+  
 
   const handleOccupantsChange = (action) => {
     if (!bookedRoom || !bookedRoom.roomName) {
@@ -38,15 +81,12 @@ function BookRoom({ hotelName, bookedRoom }) {
     }
   };
 
-  const totalAmount = bookedRoom.price
-    ? occupants * (days * bookedRoom.price)
-    : 0;
 
   
 
-  // useEffect(() => {
-  //   console.log(bookingCart);
-  // }, [bookingCart])
+  useEffect(() => {
+    console.log(bookingCart);
+  }, [bookingCart])
   
 
   return (
@@ -57,7 +97,7 @@ function BookRoom({ hotelName, bookedRoom }) {
         </h1>
         <div className="flex xs:flex-col-reverse md:flex-row justify-between border-b-[2px] border-gray-300  my-[10px]">
           <div className="xs:w-full md:w-[70%]">
-            <h1 className="font-bold">{bookedRoom.roomName}</h1>
+            <h1 className="font-bold text-center">{bookedRoom.roomName}</h1>
             <p className="flex">
               <IoMdTime className="text-xl" /> Check-in 2:00 PM | Check-out
               12:00 PM
@@ -66,9 +106,11 @@ function BookRoom({ hotelName, bookedRoom }) {
           <div
             className="xs:w-full md:w-[30%]  min-h-[100px] bg-cover bg-center rounded-[5px]"
             style={{
-              backgroundImage: `url(${bookedRoom.image})`,
+              backgroundImage: `url(${bookedRoom.roomImage})`,
             }}
-          ></div>
+          >
+            <img src={`http://localhost:8000/${bookedRoom.roomImage}`} alt="Chosen room Image" className="w-full h-full object-cover " />
+          </div>
         </div>
         <div className="border-b-[2px] border-gray-300  my-[10px] space-y-3">
           <p className="flex">
@@ -94,14 +136,19 @@ function BookRoom({ hotelName, bookedRoom }) {
           </div>
         </div>
         <div className="flex justify-between border-b-[2px] border-gray-300  my-[10px] p-[10px]">
+          <p>Duration</p>
+          <p>{numberOfNights? numberOfNights : 0}Days</p>
+        </div>
+        <div className="flex justify-between border-b-[2px] border-gray-300  my-[10px] p-[10px]">
           <p>Total</p>
-          <p>₦{totalAmount}</p>
+          <p>₦{formattedTotalCost}</p>
         </div>
         <div className="flex justify-center ">
           <Link to="/bookingpayment">
-          <button className="p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800" onClick={()=>{handleBookingCart(hotelName, bookedRoom, occupants, totalAmount)}}>
+          <button className="p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800" onClick={handleRoomBooking}>
             Add to Booking Cart
-          </button></Link>
+          </button>
+          </Link>
         </div>
       </div>
     </div>

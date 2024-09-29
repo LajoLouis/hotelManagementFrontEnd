@@ -2,15 +2,23 @@ import { FaHotel } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { IoBook } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import { BiLogOut } from "react-icons/bi";
+import HotelContext from "../context/HotelContext";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const {setUserProfile} = useContext(HotelContext)
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const logout = ()=>{
+    localStorage.removeItem("auth-token")
+    setUserProfile(null)
+  }
 
   return (
     <header className="bg-stone-200 sticky top-0 z-30 shadow-sm shadow-gray-900">
@@ -71,13 +79,15 @@ function Header() {
           >
             <IoBook className="mr-2" /> Booking
           </Link>
-          <form className="block py-2 px-6 md:px-0">
-            <input
-              type="text"
-              placeholder="Location"
-              className="font-Gupter p-[5%] pb-2 focus:border-[1px] focus:border-stone-600 focus:outline-none bg-inherit border-b-stone-600 border-[2px] mb-6"
-            />
-          </form>
+          <button
+            to="/"
+            className=" py-2 px-6 md:px-0 hover:bg-gray-300 md:hover:bg-transparent md:hover:text-gray-700 flex items-center"
+            onClick={logout}
+          >
+            <BiLogOut className="mr-2 font-extrabold text-xl"/>
+            Logout
+          </button>
+          
         </nav>
       </div>
     </header>

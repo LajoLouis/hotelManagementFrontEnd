@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import useAlert from "../hooks/useAlert";
 import { v4 as uuidv4 } from "uuid";
+import AuthContext from "./AuthContext";
 
 const HotelContext = createContext();
 
@@ -11,22 +12,55 @@ export const HotelProvider = ({ children }) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [bookingCart, setBookingCart] = useState([]);
-  const [userProfile, setUserProfile] = useState([])
+  const [userProfile, setUserProfile] = useState({})
+  const [state, dispatch] = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+
+  const isAuthenticated = state.accessToken !== null;
 
   // useEffect to fetch all hotels when page loads
   useEffect(() => {
     fetchHotel();
+    getUserProfile();
   }, []);
 
   // async function to fetch all hotels
   const fetchHotel = async () => {
-    const res = await fetch("http://localhost:3000/hotels");
+    const res = await fetch("http://localhost:8000/bookvialajo/hotels");
     const data = await res.json();
     setHotel(data);
   };
 
   // variable for storing today's date
   const today = new Date().toISOString().split("T")[0];
+
+  const getUserProfile = async () => {
+    const token = localStorage.getItem("auth-token");
+
+    if (token) {
+      try {
+        const res = await fetch(
+          "http://localhost:8000/bookvialajo/userProfile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": token,
+            },
+          }
+        );
+
+        const data = await res.json();
+        setUserProfile(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user data", error);
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+  };
 
 
   // function to handle booking of rooms and adding them to cart
@@ -51,7 +85,7 @@ export const HotelProvider = ({ children }) => {
         bookingId: uuidv4(),
         hotel: hotelName,
         name: bookedRoom.roomName,
-        image: bookedRoom.image,
+        image: bookedRoom.roomImage,
         checkIn: checkIn,
         checkOut: checkOut,
         occupants: occupants,
@@ -62,6 +96,8 @@ export const HotelProvider = ({ children }) => {
         "success",
         "Booking verified, proceed to profile to make payment"
       );
+      setCheckIn("")
+      setCheckOut("")
     }
   };
 
@@ -74,28 +110,7 @@ export const HotelProvider = ({ children }) => {
 
 
 
-  const handleRegistration = (e) =>{
-    e.preventDefault()
-
-    const firstName = e.target.elements.firstname.value
-    const lastName = e.target.elements.lastname.value
-    const email = e.target.elements.email.value
-    const phone = e.target.elements.phone.value
-    const password = e.target.elements.password.value
-    const confirmPassword = e.target.elements.confirmPassword.value
-
-    if (password !== confirmPassword) {
-      showAndHide("error", "password must be the same")
-    }else {
-      const newUserProfile = [firstName, lastName, email, phone, password]
-      setUserProfile(newUserProfile)
-
-      setTimeout(() => {
-        console.log(userProfile);
-        
-      }, 3000);
-    }
-  }
+  
 
   return (
     <HotelContext.Provider
@@ -114,8 +129,10 @@ export const HotelProvider = ({ children }) => {
         handleBookingCart,
         userProfile,
         setUserProfile,
-        handleRegistration,
-        deletebookedRoom
+        deletebookedRoom,
+        isAuthenticated,
+        setBookingCart,
+        getUserProfile
       }}
     >
       {children}
