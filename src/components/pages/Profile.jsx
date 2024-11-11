@@ -164,6 +164,23 @@ function Profile() {
               >
                 <CiEdit className="text-[20px] " />
               </button>
+              <div>
+                <h1 className="text-center font-extrabold text-3xl p-[10px]">Booking History</h1>
+                {userProfile?.bookingHistory?.map((history)=> (
+                  <div className="border-[1px] m-[2px] border-black flex" key={history._id}>
+                    <div className="w-[70%]">
+                    <h1>Date: {history?.bookingDate}</h1>
+                    <div>
+                      <h1 className="text-2xl font-extrabold">{history?.room?.hotel?.name}</h1>
+                      <h1>Room:{history?.room?.roomName}</h1>
+                    </div>
+                    </div>
+                    <div className="w-[30%]">
+                      <img src={`http://localhost:8000/${history.room.roomImage}`} alt="" className="object-cover h-full"/>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           }
         </div>

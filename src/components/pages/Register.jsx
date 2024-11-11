@@ -12,9 +12,9 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("")
     const {showAndHide, isAuthenticated, setUserProfile} = useContext(HotelContext)
   
-    if (isAuthenticated) {
-      return <Navigate to="/"/>
-    }
+    // if (isAuthenticated) {
+    //   return <Navigate to="/"/>
+    // }
 
   const redirect = useNavigate();
 
@@ -96,7 +96,7 @@ function Register() {
             </label>
             <input
               className="p-[5%] font-Gupter focus:border-[1px] focus:border-stone-600 focus:outline-none bg-inherit border-b-stone-600 border-[2px] mb-6 pb-2"
-              type="text"
+              type="number"
               name="phone"
               placeholder="Phone Number"
               onChange={(e)=> setPhone(e.target.value)}

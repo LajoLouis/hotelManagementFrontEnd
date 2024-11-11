@@ -5,7 +5,7 @@ import HotelContext from "../context/HotelContext";
 
 function LandingPage() {
   const states = ["Abuja", "Lagos", "Imo"];
-  const { hotel, searchedHotel, setSearchedHotel, showAndHide, today, checkIn, setCheckIn, setCheckOut } =
+  const { hotel, searchedHotel, setSearchedHotel, showAndHide, today, checkIn, setCheckIn, setCheckOut, dayAfterCheckIn } =
     useContext(HotelContext);
 
 
@@ -44,6 +44,7 @@ function LandingPage() {
   
   // code for getting yesterday's date
   const yesterday = new Date(Date.now()- 86400000).toISOString().split("T")[0]
+  
 
   return (
     // search div for users
@@ -93,7 +94,7 @@ function LandingPage() {
                 name="checkout"
                 className="font-Gupter p-[5%] pb-2 focus:border-[1px] focus:border-stone-600 focus:outline-none "
                 required
-                min={checkIn}
+                min={dayAfterCheckIn}
               />
             </div>
             <div className="my-3 text-[#f5f5f5]">
@@ -119,7 +120,7 @@ function LandingPage() {
               <img
                 src="/images/abujaImage.jpeg"
                 alt=""
-                className="w-full h-[300px]  transition hover:scale-110 duration-1000"
+                className="w-full h-[300px] transition hover:scale-110 duration-1000"
               />
             </Link>
           </div>

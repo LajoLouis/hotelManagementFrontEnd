@@ -15,6 +15,12 @@ import BookingPayment from "./components/pages/BookingPayment";
 import Profile from "./components/pages/Profile";
 import { AuthProvider } from "./context/AuthContext";
 import useLocalStorage from "./hooks/useLocalStorage";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Loading from "./components/pages/Loading";
+import HotelMap from "./components/pages/HotelMap";
+import BookingConfirmed from "./components/pages/BookingConfirmed";
+
+const queryClient = new QueryClient();
 
 function App() {
   const { getItem } = useLocalStorage("auth-token");
@@ -22,6 +28,7 @@ function App() {
   let authInitialState = { accessToken: token ?? null };
   return (
     <div >
+      <QueryClientProvider client={queryClient}>
       <AuthProvider defaultState={authInitialState}>
       <HotelProvider>
         <Router>
@@ -44,11 +51,15 @@ function App() {
             <Route path = "/bookroom" element={<BookRoom/>}/>
             <Route path = "/bookingpayment" element={<BookingPayment/>}/>
             <Route path = "/profile" element={<Profile/>}/>
+            <Route path = "/loading" element={<Loading/>}/>
+            <Route path = "/hotelmap" element={<HotelMap/>}/>
+            <Route path = "/bookingconfirmed" element={<BookingConfirmed/>}/>
           </Routes>
           <Footer />
         </Router>
       </HotelProvider>
       </AuthProvider>
+      </QueryClientProvider>
     </div>
   );
 }

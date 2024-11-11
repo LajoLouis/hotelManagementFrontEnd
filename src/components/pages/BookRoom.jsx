@@ -8,9 +8,9 @@ import HotelContext from "../../context/HotelContext";
 import { Link } from "react-router-dom";
 
 function BookRoom({ hotelName, bookedRoom }) {
-  const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart } = useContext(HotelContext);
+  const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart, getBookings } = useContext(HotelContext);
   const [occupants, setOccupants] = useState(1);
-  const [paynmentStatus, setPaymentStatus] = useState(false)
+  const [paymentStatus, setPaymentStatus] = useState(false)
 
   const checkInDate = new Date(checkIn).getTime();
   const checkOutDate = new Date(checkOut).getTime();
@@ -40,15 +40,22 @@ function BookRoom({ hotelName, bookedRoom }) {
           "Content-Type" : "application/json",
           "auth-token" : localStorage.getItem("auth-token")
         },
-        body: JSON.stringify({room, checkIn, checkOut, numberOfNights, totalCost, occupants, bookingDate, paynmentStatus })
+        body: JSON.stringify({room, checkIn, checkOut, numberOfNights, totalCost, occupants, bookingDate, paymentStatus })
       })
 
       const data = await res.json()
       if (data === "Input checkIn and CheckOut date") {
         showAndHide("Please Input checkIn and checkOut date")
+      }if (data === "Unauthorized access") {
+        showAndHide("error", "Kindly Login")
+        
       }else{
-        setBookingCart(data)
+        console.log("Rensponse Data ", data);
       }
+      
+      setTimeout(() => {
+        getBookings()
+      }, 0);
 
     } catch (error) {
       console.log(error);
@@ -145,7 +152,7 @@ function BookRoom({ hotelName, bookedRoom }) {
         </div>
         <div className="flex justify-center ">
           <Link to="/bookingpayment">
-          <button className="p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800" onClick={handleRoomBooking}>
+          <button className="p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800" onClick={handleRoomBooking} >
             Add to Booking Cart
           </button>
           </Link>

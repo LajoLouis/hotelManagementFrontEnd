@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import HotelContext from "../../context/HotelContext";
 import BookRoom from "./BookRoom";
 import { TfiHandPointDown } from "react-icons/tfi";
@@ -10,6 +10,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { BsFacebook } from "react-icons/bs";
 import { LuInstagram } from "react-icons/lu";
 import { FaPerson } from "react-icons/fa6";
+import HotelMap from "./HotelMap";
 
 function HotelDetails() {
   // Using the parameters to find hotel chosen
@@ -23,10 +24,15 @@ function HotelDetails() {
     setCheckOut,
     checkIn,
     checkOut,
+    dayAfterCheckIn
   } = useContext(HotelContext);
+
+  
   const specificHotel = hotel.find((item) => item._id == hotelId);
   const [mainImage, setMainImage] = useState(specificHotel?.image);
   const [bookedRoom, setBookedRoom] = useState({});
+  const [readMore, setReadMore] = useState(false)
+  const [openMap, setOpenMap] = useState(false)
 
   const handleSelection = (room) => {
     if (checkIn && checkOut !== "") {
@@ -36,6 +42,11 @@ function HotelDetails() {
       showAndHide("error", "please input checkIn and checkOut date");
     }
   };
+  
+
+  const handleMapSize = ()=>{
+    setOpenMap(!openMap)
+  }
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen relative top-0">
@@ -132,6 +143,12 @@ function HotelDetails() {
               <li key={amenity._id}>{amenity.name}</li>
             ))}
           </ul>
+          {/* <Link to="/hotelmap" className="h-[200px] overflow-hidden">
+            <HotelMap/>
+          </Link> */}
+          <div onClick={handleMapSize} className={`${openMap ? "h-[80%] w-[80%] fixed top-8 left-8": "h-[200px]"}`}>
+              <HotelMap/>
+          </div>
         </div>
       </div>
       <div className="bg-gray-900 bg-opacity-90 opacity-80 bg-center bg-cover flex flex-col items-center p-[10px]">
@@ -174,7 +191,7 @@ function HotelDetails() {
                 name="checkout"
                 className="font-Gupter p-[5%] pb-2 focus:border-[1px] focus:border-stone-600 focus:outline-none "
                 required
-                min={checkIn}
+                min={dayAfterCheckIn}
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
               />
@@ -182,7 +199,7 @@ function HotelDetails() {
           </form>
         </div>
       </div>
-      <div className="flex xs:flex-col md:flex-row font-Gupter text-center relative top-0">
+      <div className="flex xs:flex-col md:flex-row font-Gupter text-center">
         <div className="xs:w-[90%]xs:m-auto md:w-[60%]">
           {specificHotel?.rooms.map((room, index) => (
             <div
@@ -204,28 +221,27 @@ function HotelDetails() {
               </div>
               <div className="xs:w-full md:w-[60%] space-y-5 p-[15px]">
                 <h1 className="text-3xl">{room.roomName}</h1>
-                <p>{room.description}</p>
-                {/* <p>
-                  Maximum Capacity:{" "}
-                  <b className="font-extrabold text-[20px]">{room.capacity}</b>
-                </p> */}
-                <div className="flex justify-center">
-                  <p>Maximum Capacity: </p>
-                  <p>{room.capacity}</p>
-                  <FaPerson  className="text-[20px]"/>
+                <div>
+                <p className={`${readMore ? "h-full": "overflow-hidden h-[100px] transition ease duration-1000"}`}>{room.description} </p>
+                <button className="underline hover:text-blue-950 text-blue-700 flex justify-start" onClick={() => setReadMore(!readMore)}>{readMore ? <span>Show Less...</span> : <span>Show More...</span>}</button>
+                </div>
+                <div className="flex justify-center space-x-1">
+                  <p className="text-2xl font-extralight">Capacity: </p>
+                  <p className="text-2xl font-extrabold">{room.capacity}</p>
+                  <FaPerson  className="text-3xl"/>
                 </div>
                 <p>₦ {new Intl.NumberFormat('en-US').format(room.price)} / Night</p>
                 <button
                   className="bg-gray-900 p-[10px] my-[20px] text-white hover:bg-gray-800"
                   onClick={() => handleSelection(room)}
                 >
-                  Choose Room
+                  <a href="#booker">Choose Room</a>
                 </button>
               </div>
             </div>
           ))}
         </div>
-        <div className="xs:w-full md:w-[40%] sticky top-0 left-0">
+        <div className="xs:w-full md:w-[40%] sticky top-[100px] h-full " id="booker">
           <BookRoom hotelName={specificHotel?.name} bookedRoom={bookedRoom} />
         </div>
       </div>
