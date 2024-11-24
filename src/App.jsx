@@ -17,8 +17,9 @@ import { AuthProvider } from "./context/AuthContext";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Loading from "./components/pages/Loading";
-import HotelMap from "./components/pages/HotelMap";
+// import HotelMap from "./components/pages/HotelMap";
 import BookingConfirmed from "./components/pages/BookingConfirmed";
+import SkeletonProfile from "./skeletons/SkeletonProfile";
 
 const queryClient = new QueryClient();
 
@@ -52,8 +53,9 @@ function App() {
             <Route path = "/bookingpayment" element={<BookingPayment/>}/>
             <Route path = "/profile" element={<Profile/>}/>
             <Route path = "/loading" element={<Loading/>}/>
-            <Route path = "/hotelmap" element={<HotelMap/>}/>
+            {/* <Route path = "/hotelmap" element={<HotelMap/>}/> */}
             <Route path = "/bookingconfirmed" element={<BookingConfirmed/>}/>
+            <Route path = "/skeletonprofile" element={<SkeletonProfile/>}/>
           </Routes>
           <Footer />
         </Router>

@@ -24,12 +24,12 @@ const userIcon = new L.Icon({
   shadowAnchor: [20, 25],
 });
 
-function HotelMap() {
-    const center = [9.009494656835743, 7.504763061854439]
-    const position =[9.009494656835743, 7.504763061854439]
+function HotelMap({specificHotelLocation, specificHotelName}) {
+    const center = [specificHotelLocation?.coordinates[0]||0, specificHotelLocation?.coordinates[1]||0]
+    const position =[specificHotelLocation?.coordinates[0]||0, specificHotelLocation?.coordinates[1]||0]
 
     const ShowDirections = () => {
-      const hotelLocation = { lat: 9.009494656835743, lng: 7.504763061854439 }
+      const hotelLocation = { lat: specificHotelLocation?.coordinates[0]||0, lng: specificHotelLocation?.coordinates[1]||0 }
       const map = useMap(); // Get access to the Leaflet map instance
   
       useEffect(() => {
@@ -46,12 +46,12 @@ function HotelMap() {
   
           // Add hotel marker with custom icon
            L.marker([hotelLocation.lat, hotelLocation.lng], { icon: hotelIcon }).addTo(map)
-            .bindPopup("Hotel Location").openPopup(); // Optional popup
+            .bindPopup(`${specificHotelName}`).openPopup(); // Optional popup
 
             const routingControl = L.Routing.control({
               waypoints: [
-                L.latLng(latitude, longitude),   // User's location
-                L.latLng(hotelLocation.lat, hotelLocation.lng)  // Hotel's location
+                L.latLng(hotelLocation.lat, hotelLocation.lng), // Hotel's location
+                L.latLng(latitude, longitude)   // User's location
               ],
               routeWhileDragging: true,
               createMarker: function() { return null; }
@@ -59,12 +59,12 @@ function HotelMap() {
 
             routingControl.on('routesfound', function(e) {
               const routes = e.routes;
-              const userMarker = L.marker([latitude, longitude], { icon: userIcon });
               const hotelMarker = L.marker([hotelLocation.lat, hotelLocation.lng], { icon: hotelIcon });
+              const userMarker = L.marker([latitude, longitude], { icon: userIcon });
   
               // Add custom markers after routing is calculated
               userMarker.addTo(map).bindPopup("You are here!").openPopup();
-              hotelMarker.addTo(map).bindPopup("Hotel Location").openPopup();
+              hotelMarker.addTo(map).bindPopup(`${specificHotelName}`).openPopup();
             });
   
             return () => map.removeControl(routingControl); // Cleanup routing on unmount

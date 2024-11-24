@@ -25,7 +25,7 @@ function SearchedHotels() {
     <div>
       <div>
         {searchedHotel.length > 0 ? (
-          searchedHotel.map((item) => <HotelCard key={item.id} item={item} />)
+          searchedHotel.map((item) => <HotelCard key={item._id} item={item} />)
         ) : (
           <div>No hotels found.</div>
         )}

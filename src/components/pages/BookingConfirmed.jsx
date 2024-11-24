@@ -41,7 +41,21 @@ function BookingConfirmed() {
 
 
   return (
-    <div>BookingConfirmed</div>
+    <div className='bg-[url("/images/sunrise1.jpg")] h-screen bg-no-repeat bg-cover flex justify-center items-center'>
+      <div className='bg-white md:w-[50%] xs:w-full md:h-fit xs:h-fit bg-opacity-70 rounded-[20px] '>
+        <h1 className='text-center text-[30px] font-extrabold'>BookingConfirmed</h1>
+        <p className='text-center p-[20px] text-[20px]'>Thank you for trusting our platform</p>
+        <div className='w-[90%] mx-auto'>
+          <h1 className='font-bold'>Steps after booking</h1>
+          <ul className='list-disc '>
+            <li>Drive Carefully to the booked hotel Using our in-app Map</li>
+            <li>Present the booking_id to the necessary staff</li>
+            <li>Enjoy your stay</li>
+            <li>Thanks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   )
 }
 

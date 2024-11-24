@@ -11,6 +11,7 @@ function Login() {
     const {showAndHide, isAuthenticated, setUserProfile} = useContext(HotelContext)
     const [state, dispatch] = useContext(AuthContext)
     const {setItem} = useLocalStorage("auth-token")
+    const [invalid, setInvalid] = useState(false)
 
     // if (isAuthenticated) {
     //     return <Navigate to="/"/>
@@ -32,6 +33,7 @@ function Login() {
             const data = await res.json()
             if (data === "invalid email/password") {
                 showAndHide("error", "invalid email/password")
+                setInvalid(true)
             }else {
                 dispatch({type: "setToken", payload:data.token})
                 setItem(data.token)
@@ -61,6 +63,7 @@ function Login() {
               placeholder="Enter your email address"
               onChange={(e)=> setEmail(e.target.value)}
             />
+            <p className={`${invalid? "text-red-600 text-sm" : "hidden"}`}>Invalid Email/password</p>
             <label htmlFor="password" className="text-[12px]">
               Password
             </label>
@@ -70,6 +73,7 @@ function Login() {
               placeholder="passsword"
               onChange={(e)=> setPassword(e.target.value)}
             />
+            <p className={`${invalid? "text-red-600 text-sm" : "hidden"}`}>Invalid Email/password</p>
           <button className="p-[10px] bg-gray-900 hover:bg-gray-700 my-4 text-white">
             Login
           </button>

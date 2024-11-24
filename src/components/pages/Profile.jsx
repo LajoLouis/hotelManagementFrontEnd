@@ -5,7 +5,7 @@ import { CiEdit } from "react-icons/ci";
 import { IoSendSharp } from "react-icons/io5";
 
 function Profile() {
-  const { userProfile, setUserProfile, showAndHide, loading} = useContext(HotelContext);
+  const { userProfile, setUserProfile, showAndHide, loading } = useContext(HotelContext);
   const [isDisabled, setIsDisabled] = useState(true);
   
 
@@ -169,14 +169,14 @@ function Profile() {
                 {userProfile?.bookingHistory?.map((history)=> (
                   <div className="border-[1px] m-[2px] border-black flex" key={history._id}>
                     <div className="w-[70%]">
-                    <h1>Date: {history?.bookingDate}</h1>
+                    <h1>Date: {history?.date}</h1>
                     <div>
                       <h1 className="text-2xl font-extrabold">{history?.room?.hotel?.name}</h1>
                       <h1>Room:{history?.room?.roomName}</h1>
                     </div>
                     </div>
                     <div className="w-[30%]">
-                      <img src={`http://localhost:8000/${history.room.roomImage}`} alt="" className="object-cover h-full"/>
+                      <img src={`http://localhost:8000/${history?.room?.roomImage}`} alt="" className="object-cover h-full"/>
                     </div>
                   </div>
                 ))}

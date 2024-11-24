@@ -74,7 +74,7 @@ export const HotelProvider = ({ children }) => {
     if (token) {
       try {
         const res = await fetch(
-          "http://localhost:8000/bookvialajo/getbooking",
+          "http://localhost:8000/bookvialajo/getBooking",
           {
             method: "GET",
             headers: {

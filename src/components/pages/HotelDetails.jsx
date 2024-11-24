@@ -144,10 +144,10 @@ function HotelDetails() {
             ))}
           </ul>
           {/* <Link to="/hotelmap" className="h-[200px] overflow-hidden">
-            <HotelMap/>
+            <HotelMap  specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
           </Link> */}
           <div onClick={handleMapSize} className={`${openMap ? "h-[80%] w-[80%] fixed top-8 left-8": "h-[200px]"}`}>
-              <HotelMap/>
+              <HotelMap specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
           </div>
         </div>
       </div>
