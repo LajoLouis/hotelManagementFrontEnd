@@ -33,7 +33,7 @@ function Register() {
       formData.append("image", image)
     }
     try {
-      const res = await fetch("http://localhost:8000/bookvialajo/register", {
+      const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/register", {
           method : "POST",
           body: formData
       })

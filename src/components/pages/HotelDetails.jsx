@@ -58,7 +58,7 @@ function HotelDetails() {
       <div className="md:flex w-[90%] mx-auto my-4">
         <div className="flex flex-col md:flex-row md:flex-wrap xs:flex-nowrap xs:w-[90%] md:w-[70%] m-auto justify-between shadow-lg rounded-lg bg-white overflow-hidden">
           <img
-            src={"http://localhost:8000/" + mainImage}
+            src={"https://bookvialajo.onrender.com/" + mainImage}
             alt={specificHotel?.name}
             className="w-full md:h-[40%] object-cover rounded-lg"
           />
@@ -75,7 +75,7 @@ function HotelDetails() {
             ].map((image, index) => (
               <img
                 key={index}
-                src={`http://localhost:8000/${image}`}
+                src={`https://bookvialajo.onrender.com/${image}`}
                 alt={`Image ${index + 1}`}
                 className="flex-shrink-0 xs:w-[43%] md:w-[22%] h-[150px] object-cover rounded-lg cursor-pointer transform hover:scale-110 transition-transform"
                 onClick={() => setMainImage(image)}
@@ -209,12 +209,12 @@ function HotelDetails() {
               <div
                 className="xs:w-full md:w-[40%] bg-cover bg-center"
                 style={{
-                  backgroundImage: `url("http://localhost:8000/${room.roomImage}")`,
+                  backgroundImage: `url("https://bookvialajo.onrender.com/${room.roomImage}")`,
                   minHeight: "200px",
                 }}
               >
                 <img
-                  src={`http://localhost:8000/${room.roomImage}`}
+                  src={`https://bookvialajo.onrender.com/${room.roomImage}`}
                   alt=""
                   className="w-full h-full object-cover "
                 />

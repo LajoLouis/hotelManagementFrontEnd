@@ -9,11 +9,11 @@ function HotelCard({ item }) {
         <div
           className={`xs:w-full md:w-[40%] bg-cover bg-center transition hover:scale-110 duration-1000`}
           style={{
-            backgroundImage: `url("http://localhost:8000/${item.image}")`,
+            backgroundImage: `url("https://bookvialajo.onrender.com/${item.image}")`,
             minHeight: "200px",
           }}
         >
-          <img src={`http://localhost:8000/${item.image}`} alt="" className="w-full h-full object-cover " />
+          <img src={`https://bookvialajo.onrender.com/${item.image}`} alt="" className="w-full h-full object-cover " />
         </div>
         <div className="xs:w-full md:w-[60%] p-6">
           <h1 className="text-center text-[34px] font-extrabold">

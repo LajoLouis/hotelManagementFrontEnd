@@ -22,7 +22,7 @@ function StatesHotels() {
         <div
           className="xs:w-[0%] md:w-[40%] bg-center bg-cover "
           style={{
-            backgroundImage: `url(http://localhost:8000/${firstHotelImage})`,
+            backgroundImage: `url(https://bookvialajo.onrender.com/${firstHotelImage})`,
             minHeight: "200px",
           }}
         ></div>

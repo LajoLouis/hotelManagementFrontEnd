@@ -22,7 +22,7 @@ function Login() {
     const loginHandler = async(e)=>{
         e.preventDefault()
         try {
-            const res = await fetch("http://localhost:8000/bookvialajo/login", {
+            const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/login", {
                 method : "POST",
                 headers: {
                     "Content-Type" : "application/json"

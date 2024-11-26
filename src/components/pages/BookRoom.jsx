@@ -34,7 +34,7 @@ function BookRoom({ hotelName, bookedRoom }) {
     // }
     const room = bookedRoom._id
     try {
-      const res = await fetch("http://localhost:8000/bookvialajo/makebooking",{
+      const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/makebooking",{
         method: "POST",
         headers: {
           "Content-Type" : "application/json",
@@ -116,7 +116,7 @@ function BookRoom({ hotelName, bookedRoom }) {
               backgroundImage: `url(${bookedRoom.roomImage})`,
             }}
           >
-            <img src={`http://localhost:8000/${bookedRoom.roomImage}`} alt="Chosen room Image" className="w-full h-full object-cover " />
+            <img src={`https://bookvialajo.onrender.com/${bookedRoom.roomImage}`} alt="Chosen room Image" className="w-full h-full object-cover " />
           </div>
         </div>
         <div className="border-b-[2px] border-gray-300  my-[10px] space-y-3">

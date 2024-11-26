@@ -43,7 +43,7 @@ function BookingPayment() {
   const handleMakePayment = async (bookingId, amount) => {
     const currency = "NGN"
     try {
-      const res = await fetch("http://localhost:8000/bookvialajo/payment/initiate", {
+      const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/payment/initiate", {
         method : "POST",
         headers:{
           "Content-Type": "application/json",
@@ -77,10 +77,10 @@ function BookingPayment() {
           <div
             className="md:w-1/3 bg-cover bg-center h-64 md:h-auto"
             style={{
-              backgroundImage: `url(http://localhost:8000/${reservation?.room?.roomImage})`,
+              backgroundImage: `url(https://bookvialajo.onrender.com/${reservation?.room?.roomImage})`,
             }}
           >
-            <img src={`http://localhost:8000/${reservation?.room?.roomImage}`} alt="" className="w-full h-full object-cover " />
+            <img src={`https://bookvialajo.onrender.com/${reservation?.room?.roomImage}`} alt="" className="w-full h-full object-cover " />
           </div>
           <div className="md:w-2/3 p-6 flex flex-col justify-between">
             <h1 className="text-3xl font-bold text-gray-800 mb-4">

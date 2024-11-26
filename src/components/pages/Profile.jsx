@@ -28,7 +28,7 @@ function Profile() {
 
     try {
       const res = await fetch(
-        "http://localhost:8000/bookvialajo/editUserProfile",
+        "https://bookvialajo.onrender.com/bookvialajo/editUserProfile",
         {
           method: "PATCH",
           headers: {
@@ -67,7 +67,7 @@ function Profile() {
               <div className="m-auto h-[80px] w-[80px] rounded-full overflow-hidden">
                 {userProfile.image ? (
                   <img
-                    src={`http://localhost:8000/${userProfile.image}`}
+                    src={`https://bookvialajo.onrender.com/${userProfile.image}`}
                     alt={userProfile.firstName}
                     className="w-full h-full object-cover"
                   />
@@ -176,7 +176,7 @@ function Profile() {
                     </div>
                     </div>
                     <div className="w-[30%]">
-                      <img src={`http://localhost:8000/${history?.room?.roomImage}`} alt="" className="object-cover h-full"/>
+                      <img src={`https://bookvialajo.onrender.com/${history?.room?.roomImage}`} alt="" className="object-cover h-full"/>
                     </div>
                   </div>
                 ))}
