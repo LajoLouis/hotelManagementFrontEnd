@@ -164,23 +164,86 @@ function Profile() {
               >
                 <CiEdit className="text-[20px] " />
               </button>
-              <div>
-                <h1 className="text-center font-extrabold text-3xl p-[10px]">Booking History</h1>
-                {userProfile?.bookingHistory?.map((history)=> (
-                  <div className="border-[1px] m-[2px] border-black flex" key={history._id}>
-                    <div className="w-[70%]">
-                    <h1>Date: {history?.date}</h1>
-                    <div>
-                      <h1 className="text-2xl font-extrabold">{history?.room?.hotel?.name}</h1>
-                      <h1>Room:{history?.room?.roomName}</h1>
-                    </div>
-                    </div>
-                    <div className="w-[30%]">
-                      <img src={`https://bookvialajo.onrender.com/${history?.room?.roomImage}`} alt="" className="object-cover h-full"/>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <div className="p-8 bg-gray-100 min-h-screen">
+  <h1 className="text-center font-extrabold text-4xl mb-8 text-gray-800">Booking History</h1>
+  {userProfile?.bookingHistory?.length > 0 ? (
+    userProfile.bookingHistory.map((history) => (
+      <div
+        className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden mb-6"
+        key={history._id}
+      >
+        {/* Room Image */}
+        <div className="md:w-1/3">
+          <img
+            src={`https://bookvialajo.onrender.com/${history?.room?.roomImage}`}
+            alt="Room"
+            className="w-full h-64 object-cover"
+          />
+        </div>
+
+        {/* Booking Details */}
+        <div className="md:w-2/3 p-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">{history?.room?.hotel?.name}</h2>
+          <p className="text-gray-600 mb-4">
+            <span className="font-semibold">Hotel Address:</span> {history?.room?.hotel?.address}
+          </p>
+          <p className="text-gray-600 mb-4">
+            <span className="font-semibold">Room Name:</span> {history?.room?.roomName}
+          </p>
+
+          {/* Booking Dates */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <p className="text-gray-600">
+              <span className="font-semibold">Check-In:</span> {history?.checkIn}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Check-Out:</span> {history?.checkOut}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Nights:</span> {history?.numberOfNights}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Occupants:</span> {history?.occupants}
+            </p>
+          </div>
+
+          {/* Payment Details */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <p className="text-gray-600">
+              <span className="font-semibold">Order ID:</span> {history?.orderId}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Transaction ID:</span> {history?.transactionId}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-semibold">Total Cost:</span> ₦{history?.totalCost?.toLocaleString()}
+            </p>
+            <p
+              className={`font-semibold ${
+                history?.paymentStatus === "Completed"
+                  ? "text-green-500"
+                  : history?.paymentStatus === "Pending"
+                  ? "text-yellow-500"
+                  : "text-red-500"
+              }`}
+            >
+              <span>Payment Status:</span> {history?.paymentStatus}
+            </p>
+          </div>
+
+          <p className="text-gray-600">
+            <span className="font-semibold">Date Booked:</span> {new Date(history?.date).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p className="text-center text-gray-600 text-lg font-semibold">
+      No booking history found. Start booking your favorite rooms!
+    </p>
+  )}
+</div>
+
             </div>
           }
         </div>
