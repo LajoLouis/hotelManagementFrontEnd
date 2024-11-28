@@ -9,7 +9,7 @@ function BookingConfirmed() {
   const createHistory = async (transaction_id, orderId) => {
     try {
       const response = await fetch(
-        "https://bookvialajo.onrender.com/payment/verify",
+        "https://bookvialajo.onrender.com/bookvialajo/payment/verify",
         {
           method: "POST",
           headers: {
