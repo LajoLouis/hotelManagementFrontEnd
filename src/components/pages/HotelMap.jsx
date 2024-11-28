@@ -76,8 +76,7 @@ function HotelMap({specificHotelLocation, specificHotelName}) {
     };
 
   return (
-    <div className='h-screen w-screen fixed top-0 left-0'>
-      <MapContainer center={center} zoom={13} className="h-full w-full">
+    <MapContainer center={center} zoom={13} className='h-[200px] overflow-hidden'>
         <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -87,7 +86,6 @@ function HotelMap({specificHotelLocation, specificHotelName}) {
           <Popup>A pretty place in london</Popup>
         </Marker>
     </MapContainer>
-    </div>
   )
 }
 
