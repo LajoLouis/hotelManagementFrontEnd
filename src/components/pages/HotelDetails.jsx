@@ -143,12 +143,12 @@ function HotelDetails() {
               <li key={amenity._id}>{amenity.name}</li>
             ))}
           </ul>
-          {/* <Link to="/hotelmap" className="h-[200px] overflow-hidden">
+          <Link to="/hotelmap" className="h-[200px] overflow-hidden">
             <HotelMap  specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
-          </Link> */}
-          <div onClick={handleMapSize} className={`${openMap ? "h-[80%] w-[80%] fixed top-8 left-8": "h-[200px]"}`}>
+          </Link>
+          {/* <div onClick={handleMapSize} className={`${openMap ? "h-[80%] w-[80%] fixed top-8 left-8": "h-[200px]"}`}>
               <HotelMap specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="bg-gray-900 bg-opacity-90 opacity-80 bg-center bg-cover flex flex-col items-center p-[10px]">
