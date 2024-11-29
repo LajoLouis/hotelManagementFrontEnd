@@ -38,7 +38,7 @@ function Login() {
                 dispatch({type: "setToken", payload:data.token})
                 setItem(data.token)
                 setUserProfile(data.user)
-                redirect("/")
+                redirect("/", {replace:true})
                 showAndHide("success", "Login successful")
             }
         } catch (error) {

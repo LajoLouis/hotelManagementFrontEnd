@@ -26,12 +26,7 @@ function BookRoom({ hotelName, bookedRoom }) {
   const formattedTotalCost = new Intl.NumberFormat('en-US').format(totalCost)
 
   const handleRoomBooking = async()=>{
-   
-
-    // if (!bookedRoom || !bookedRoom.roomName) {
-    //   showAndHide("error", "Kindly select a room to proceed");
-    //   return;
-    // }
+ 
     const room = bookedRoom._id
     try {
       const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/makebooking",{
