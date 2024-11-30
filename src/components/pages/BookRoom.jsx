@@ -5,7 +5,7 @@ import { LuMinusCircle } from "react-icons/lu";
 import { FiPlusCircle } from "react-icons/fi";
 import { useContext, useState, useEffect } from "react";
 import HotelContext from "../../context/HotelContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function BookRoom({ hotelName, bookedRoom }) {
   const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart, getBookings } = useContext(HotelContext);
@@ -17,6 +17,7 @@ function BookRoom({ hotelName, bookedRoom }) {
   const duration = checkOutDate - checkInDate;
   const numberOfNights = duration / (1000 * 60 * 60 * 24);
   const bookingDate = new Date().toISOString()
+  const redirect = useNavigate()
 
 
   const totalCost = bookedRoom.price
@@ -43,8 +44,10 @@ function BookRoom({ hotelName, bookedRoom }) {
         showAndHide("Please Input checkIn and checkOut date")
       }if (data === "Unauthorized access") {
         showAndHide("error", "Kindly Login")
+        redirect("/login")
         
       }else{
+        redirect("/bookingpayment")
         console.log("Rensponse Data ", data);
       }
       
@@ -146,11 +149,9 @@ function BookRoom({ hotelName, bookedRoom }) {
           <p>₦{formattedTotalCost}</p>
         </div>
         <div className="flex justify-center ">
-          <Link to="/bookingpayment">
           <button className="p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800" onClick={handleRoomBooking} >
             Add to Booking Cart
           </button>
-          </Link>
         </div>
       </div>
     </div>
