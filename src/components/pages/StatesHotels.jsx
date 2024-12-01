@@ -8,7 +8,7 @@ function StatesHotels() {
   const params = useParams();
   const stateName = params.name;
   const { hotel } = useContext(HotelContext);
-  const hotelsInState = hotel.filter((item) => item.state === stateName);
+  const hotelsInState = hotel.filter((item) => item.state.toLowerCase() === stateName.toLowerCase());
   const firstHotelImage =
     hotelsInState.length > 0 ? hotelsInState[0].stateImage : null;
 
