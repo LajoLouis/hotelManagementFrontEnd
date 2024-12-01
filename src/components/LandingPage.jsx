@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import HotelContext from "../context/HotelContext";
 
 function LandingPage() {
-  const states = ["Abuja", "Lagos", "Imo"];
+  const states = ["abuja", "lagos", "imo"];
   const { hotel, searchedHotel, setSearchedHotel, showAndHide, today, checkIn, setCheckIn, setCheckOut, dayAfterCheckIn } =
     useContext(HotelContext);
 
