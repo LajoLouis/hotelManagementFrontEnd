@@ -219,7 +219,7 @@ function HotelDetails() {
                   className="w-full h-full object-cover "
                 />
               </div>
-              <div className="xs:w-full md:w-[60%] space-y-5 p-[15px]">
+              <div className={`xs:w-full md:w-[60%] space-y-5 p-[15px] bg-[url('/images/notavailable.jpg')] bg-cover ${specificHotel?.rooms?.available? "bg-opacity-0": "bg-opacity-80"}`}>
                 <h1 className="text-3xl">{room.roomName}</h1>
                 <div>
                 <p className={`${readMore ? "h-full": "overflow-hidden h-[100px] transition ease duration-1000"}`}>{room.description} </p>
@@ -234,8 +234,9 @@ function HotelDetails() {
                 <button
                   className="bg-gray-900 p-[10px] my-[20px] text-white hover:bg-gray-800"
                   onClick={() => handleSelection(room)}
+                  disabled={specificHotel?.rooms?.available}
                 >
-                  <a href="#booker">Choose Room</a>
+                  <a href="#booker">{specificHotel?.rooms?.available ? "Not Available" : "Choose Room" }</a>
                 </button>
               </div>
             </div>
