@@ -200,7 +200,7 @@ function HotelDetails() {
         </div>
       </div>
       <div className="flex xs:flex-col md:flex-row font-Gupter text-center">
-        <div className="xs:w-[90%]xs:m-auto md:w-[60%]">
+        {/* <div className="xs:w-[90%]xs:m-auto md:w-[60%]">
           {specificHotel?.rooms.map((room, index) => (
             <div
               key={index}
@@ -241,7 +241,84 @@ function HotelDetails() {
               </div>
             </div>
           ))}
+        </div> */}
+        <div className="xs:w-[90%] xs:m-auto md:w-[60%]">
+      {specificHotel?.rooms.map((room, index) => (
+        <div
+          key={index}
+          className={`flex flex-col md:flex-row my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden ${
+            !room.available ? "bg-gray-700 bg-opacity-50" : ""
+          }`}
+        >
+          {/* Room Image */}
+          <div
+            className={`xs:w-full md:w-[40%] bg-cover bg-center ${
+              !room.available ? "opacity-70 filter blur-sm" : ""
+            }`}
+            style={{
+              backgroundImage: `url("https://bookvialajo.onrender.com/${room.roomImage}")`,
+              minHeight: "200px",
+            }}
+          >
+            <img
+              src={`https://bookvialajo.onrender.com/${room.roomImage}`}
+              alt={`${room.roomName}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Room Details */}
+          <div
+            className={`xs:w-full md:w-[60%] p-[15px] space-y-5 ${
+              !room.available
+                ? "bg-gray-200 bg-opacity-80"
+                : "bg-gray-50"
+            }`}
+          >
+            <h1 className="text-2xl font-bold">{room.roomName}</h1>
+            <div>
+              <p
+                className={`text-sm ${
+                  readMore
+                    ? "h-full"
+                    : "overflow-hidden h-[100px] transition-all duration-1000 ease-in-out"
+                }`}
+              >
+                {room.description}
+              </p>
+              <button
+                className="underline text-blue-700 hover:text-blue-900"
+                onClick={() => setReadMore(!readMore)}
+              >
+                {readMore ? "Show Less..." : "Show More..."}
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <p className="text-xl font-light">Capacity:</p>
+              <p className="text-xl font-bold">{room.capacity}</p>
+              <FaPerson className="text-xl" />
+            </div>
+
+            <p className="text-lg font-semibold">
+              ₦ {new Intl.NumberFormat("en-US").format(room.price)} / Night
+            </p>
+
+            <button
+              className={`p-[10px] my-[20px] text-white rounded-md w-full ${
+                room.available
+                  ? "bg-gray-900 hover:bg-gray-800"
+                  : "bg-gray-400 cursor-not-allowed"
+              }`}
+              onClick={() => room.available && handleSelection(room)}
+              disabled={!room.available}
+            >
+              {room.available ? "Choose Room" : "Not Available"}
+            </button>
+          </div>
         </div>
+      ))}
+    </div>
         <div className="xs:w-full md:w-[40%] sticky top-[100px] h-full " id="booker">
           <BookRoom hotelName={specificHotel?.name} bookedRoom={bookedRoom} />
         </div>
