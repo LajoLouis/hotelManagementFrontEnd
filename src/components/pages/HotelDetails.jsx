@@ -236,7 +236,9 @@ function HotelDetails() {
                   onClick={() => handleSelection(room)}
                   disabled={!room.available}
                 >
-                  {room.available ? <a href="#booker">Choose Room</a> : <span>Not Available</span> }
+                  {room.available ? <a href="#booker">Choose Room</a> : <span>Not Available</span> 
+                  }
+                  {console.log(room.available)}
                 </button>
               </div>
             </div>
