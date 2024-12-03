@@ -32,7 +32,7 @@ export const HotelProvider = ({ children }) => {
   const dayAfterCheckIn = new Date(checkInMIl + 86400000).toISOString().split("T")[0]
   // async function to fetch all hotels
   const fetchHotel = async () => {
-    const res = await fetch("http://localhost:8000/bookvialajo/hotels");
+    const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/hotels");
     const data = await res.json();
     setHotel(data);
   };
@@ -45,7 +45,7 @@ export const HotelProvider = ({ children }) => {
     if (token) {
       try {
         const res = await fetch(
-          "http://localhost:8000/bookvialajo/userProfile",
+          "https://bookvialajo.onrender.com/bookvialajo/userProfile",
           {
             method: "GET",
             headers: {
@@ -74,7 +74,7 @@ export const HotelProvider = ({ children }) => {
     if (token) {
       try {
         const res = await fetch(
-          "http://localhost:8000/bookvialajo/getBooking",
+          "https://bookvialajo.onrender.com/bookvialajo/getBooking",
           {
             method: "GET",
             headers: {
@@ -102,7 +102,7 @@ export const HotelProvider = ({ children }) => {
     const token = localStorage.getItem("auth-token")
 
     try {
-      const res = await fetch("http://localhost:8000/bookvialajo/deletebooking", {
+      const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/deletebooking", {
         method: "POST",
         headers : {
           "Content-Type" : "application/json",

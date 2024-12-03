@@ -33,7 +33,7 @@ function Register() {
       formData.append("image", image)
     }
     try {
-      const res = await fetch("http://localhost:8000/bookvialajo/register", {
+      const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/register", {
           method : "POST",
           body: formData
       })
@@ -69,6 +69,7 @@ function Register() {
               type="text"
               name="firstname"
               placeholder="FirstName"
+              required
               onChange={(e)=> setFirstName(e.target.value)}
             />
             <label htmlFor="Lastname" className="text-[12px]">
@@ -79,6 +80,7 @@ function Register() {
               type="text"
               name="lastname"
               placeholder="LastName"
+              required
               onChange={(e)=> setLastName(e.target.value)}
             />
             <label htmlFor="email" className="text-[12px]">
@@ -89,6 +91,7 @@ function Register() {
               type="email"
               name="email"
               placeholder="Enter your email address"
+              required
               onChange={(e)=> setEmail(e.target.value)}
             />
             <label htmlFor="phone" className="text-[12px]">
@@ -99,6 +102,7 @@ function Register() {
               type="number"
               name="phone"
               placeholder="Phone Number"
+              required
               onChange={(e)=> setPhone(e.target.value)}
             />
             <label htmlFor="phone" className="text-[12px]">
@@ -110,6 +114,7 @@ function Register() {
               accept="/image"
               name="image"
               placeholder="image"
+              required
               onChange={(e)=> setImage(e.target.files[0])}
             />
             <label htmlFor="password" className="text-[12px]">
@@ -120,6 +125,7 @@ function Register() {
               type="password"
               name="password"
               placeholder="password"
+              required
               onChange={(e)=> setPassword(e.target.value)}
             />
             <label htmlFor="confirmPassword" className="text-[12px]">
@@ -130,6 +136,7 @@ function Register() {
               type="password"
               name="confirmPassword"
               placeholder="Confirm password"
+              required
               onChange={(e)=> setConfirmPassword(e.target.value)}
             />
             <button className="p-[10px] bg-gray-900 hover:bg-gray-700 my-4 text-white">Register</button>
