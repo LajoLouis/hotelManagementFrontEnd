@@ -307,9 +307,9 @@ function HotelDetails() {
                   : "bg-gray-400 cursor-not-allowed"
               }`}
               onClick={() => room.available && handleSelection(room)}
-              disabled={!room.available}
+              disabled={room.available}
             >
-              {room.available ? "Choose Room" : "Not Available"}
+              {room.available ? <p>Choose Room</p> : <p>Not available</p>}
             </button>
           </div>
         </div>
