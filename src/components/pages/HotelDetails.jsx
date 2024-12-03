@@ -245,7 +245,9 @@ function HotelDetails() {
           ))}
         </div> */}
         <div className="xs:w-[90%] xs:m-auto md:w-[60%]">
+          
       {specificHotel?.rooms.map((room, index) => (
+
         <div
           key={index}
           className="flex flex-col md:flex-row my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden"
@@ -302,7 +304,7 @@ function HotelDetails() {
               ₦ {new Intl.NumberFormat("en-US").format(room.price)} / Night
             </p>
             
-            <p className="font-extrabold text-[24px]">Room{room.available ? "Available" : "Not Available"}</p>
+            <p className="font-extrabold text-[24px]">Room {room.available ? "Available" : "not Available"}</p>
             <button
               className={`p-[10px] my-[20px] text-white rounded-md w-full ${
                 room.available

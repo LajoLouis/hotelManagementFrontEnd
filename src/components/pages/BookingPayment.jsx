@@ -9,7 +9,7 @@ import Loading from "./Loading";
 
 function BookingPayment() {
   // debugger
-  const { deletebookedRoom, showAndHide, bookingCart, isAuthenticated } = useContext(HotelContext);
+  const { deletebookedRoom, showAndHide, bookingCart, isAuthenticated, getUserProfile } = useContext(HotelContext);
   const [showConfirmation, setShowConfirmation] = useState(false)
   if (!isAuthenticated) {
     return <Navigate to="/login"/>
@@ -58,6 +58,7 @@ function BookingPayment() {
       } else {
         console.error(data.msg || "Failed to intitiate payment");
       }
+      getUserProfile()
     } catch (error) {
       console.log(error);
       
