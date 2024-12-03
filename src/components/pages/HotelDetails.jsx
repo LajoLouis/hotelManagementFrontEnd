@@ -146,9 +146,28 @@ function HotelDetails() {
           {/* <Link to="/hotelmap" className="h-[200px] overflow-hidden">
             <HotelMap  specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
           </Link> */}
-          <div onClick={handleMapSize} className={`${openMap ? "h-[80%] w-[80%] fixed top-8 left-8": "h-[200px]"}`}>
-              <HotelMap specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
-          </div>
+          <div
+      className={`transition-all duration-300 ${
+        openMap
+          ? "fixed inset-0 z-50 bg-white h-full w-full overflow-hidden"
+          : "h-[200px] w-full overflow-hidden"
+      }`}
+      onClick={handleMapSize}
+    >
+      <HotelMap
+        specificHotelLocation={specificHotel?.location}
+        specificHotelName={specificHotel?.name}
+        fullPage={openMap} // Pass whether it's full-page mode
+      />
+      {openMap && (
+        <button
+          onClick={handleMapSize}
+          className="absolute top-4 right-4 p-2 bg-gray-900 text-white rounded-full z-50"
+        >
+          Close Map
+        </button>
+      )}
+    </div>
         </div>
       </div>
       <div className="bg-gray-900 bg-opacity-90 opacity-80 bg-center bg-cover flex flex-col items-center p-[10px]">
