@@ -246,14 +246,12 @@ function HotelDetails() {
       {specificHotel?.rooms.map((room, index) => (
         <div
           key={index}
-          className={`flex flex-col md:flex-row my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden ${
-            !room.available ? "bg-gray-700 bg-opacity-50" : ""
-          }`}
+          className={`flex flex-col md:flex-row my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden`}
         >
           {/* Room Image */}
           <div
             className={`xs:w-full md:w-[40%] bg-cover bg-center ${
-              !room.available ? "opacity-70 filter blur-sm" : ""
+              !room.available ? "opacity-50 filter blur-sm" : ""
             }`}
             style={{
               backgroundImage: `url("https://bookvialajo.onrender.com/${room.roomImage}")`,
@@ -271,8 +269,8 @@ function HotelDetails() {
           <div
             className={`xs:w-full md:w-[60%] p-[15px] space-y-5 ${
               !room.available
-                ? "bg-gray-200 bg-opacity-80"
-                : "bg-gray-50"
+                ? "bg-gray-300 bg-opacity-80"
+                : "bg-white"
             }`}
           >
             <h1 className="text-2xl font-bold">{room.roomName}</h1>
