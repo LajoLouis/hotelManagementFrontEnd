@@ -24,7 +24,7 @@ const userIcon = new L.Icon({
   shadowAnchor: [20, 25],
 });
 
-function HotelMap({specificHotelLocation, specificHotelName}) {
+function HotelMap({specificHotelLocation, specificHotelName, fullPage}) {
     const center = [specificHotelLocation?.coordinates[0]||0, specificHotelLocation?.coordinates[1]||0]
     const position =[specificHotelLocation?.coordinates[0]||0, specificHotelLocation?.coordinates[1]||0]
 
@@ -76,7 +76,7 @@ function HotelMap({specificHotelLocation, specificHotelName}) {
     };
 
   return (
-    <MapContainer center={center} zoom={13} className='h-[200px] overflow-hidden'>
+    <MapContainer center={center} zoom={13} className={`${fullPage ? "h-full" : "h-[200px]"}`}>
         <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
