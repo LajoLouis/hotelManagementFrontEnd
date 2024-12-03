@@ -292,7 +292,7 @@ function HotelDetails() {
               </button>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-center space-x-2">
               <p className="text-xl font-light">Capacity:</p>
               <p className="text-xl font-bold">{room.capacity}</p>
               <FaPerson className="text-xl" />
@@ -301,7 +301,8 @@ function HotelDetails() {
             <p className="text-lg font-semibold">
               ₦ {new Intl.NumberFormat("en-US").format(room.price)} / Night
             </p>
-
+            
+            <p className="font-extrabold text-[24px]">Room{room.available ? "Available" : "Not Available"}</p>
             <button
               className={`p-[10px] my-[20px] text-white rounded-md w-full ${
                 room.available
