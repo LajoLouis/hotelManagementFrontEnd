@@ -11,6 +11,7 @@ function Register() {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const {showAndHide, isAuthenticated, setUserProfile} = useContext(HotelContext)
+    const [loading, setLoading] = useState(false);
   
     // if (isAuthenticated) {
     //   return <Navigate to="/"/>
@@ -20,6 +21,7 @@ function Register() {
 
   const handleRegistration = async(e) =>{
     e.preventDefault()
+    setLoading(true);
 
     const formData = new FormData()
     formData.append("firstName", firstName)
@@ -52,6 +54,8 @@ function Register() {
   } catch (error) {
       console.log(error);
       
+  }finally {
+    setLoading(false);
   }
   }
 
@@ -139,7 +143,7 @@ function Register() {
               required
               onChange={(e)=> setConfirmPassword(e.target.value)}
             />
-            <button className="p-[10px] bg-gray-900 hover:bg-gray-700 my-4 text-white">Register</button>
+            <button className={`p-[10px] bg-gray-900 hover:bg-gray-700 my-4 text-white`}>{loading ? "Loading" : "Register"}</button>
           </form>
           <p className="text-10px font-Gupter">Already existing user ? <Link to="/login" className="text-blue-700 hover:text-blue-600">Sign in</Link></p>
         </div>

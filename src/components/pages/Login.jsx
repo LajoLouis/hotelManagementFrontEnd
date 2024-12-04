@@ -12,6 +12,7 @@ function Login() {
     const [state, dispatch] = useContext(AuthContext)
     const {setItem} = useLocalStorage("auth-token")
     const [invalid, setInvalid] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     // if (isAuthenticated) {
     //     return <Navigate to="/"/>
@@ -21,6 +22,7 @@ function Login() {
 
     const loginHandler = async(e)=>{
         e.preventDefault()
+        setLoading(true);
         try {
             const res = await fetch("https://bookvialajo.onrender.com/bookvialajo/login", {
                 method : "POST",
@@ -43,6 +45,8 @@ function Login() {
             }
         } catch (error) {
             console.log(error);
+        }finally {
+          setLoading(false);
         }
     }
   return (
@@ -74,8 +78,8 @@ function Login() {
               onChange={(e)=> setPassword(e.target.value)}
             />
             <p className={`${invalid? "text-red-600 text-sm" : "hidden"}`}>Invalid Email/password</p>
-          <button className="p-[10px] bg-gray-900 hover:bg-gray-700 my-4 text-white">
-            Login
+          <button className={`p-[10px] bg-gray-900 hover:bg-gray-700 my-4 text-white ${loading ? "bg-opacity-80": ""}`}>
+          {loading ? "Loading" : "Login"}
           </button>
           </form>
           <p className="text-10px font-Gupter">

@@ -24,15 +24,14 @@ function HotelDetails() {
     setCheckOut,
     checkIn,
     checkOut,
-    dayAfterCheckIn
+    dayAfterCheckIn,
   } = useContext(HotelContext);
 
-  
   const specificHotel = hotel.find((item) => item._id == hotelId);
   const [mainImage, setMainImage] = useState(specificHotel?.image);
   const [bookedRoom, setBookedRoom] = useState({});
-  const [readMore, setReadMore] = useState(false)
-  const [openMap, setOpenMap] = useState(false)
+  const [readMore, setReadMore] = useState(false);
+  const [openMap, setOpenMap] = useState(false);
 
   const handleSelection = (room) => {
     if (checkIn && checkOut !== "") {
@@ -42,11 +41,10 @@ function HotelDetails() {
       showAndHide("error", "please input checkIn and checkOut date");
     }
   };
-  
 
-  const handleMapSize = ()=>{
-    setOpenMap(!openMap)
-  }
+  const handleMapSize = () => {
+    setOpenMap(!openMap);
+  };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen relative top-0">
@@ -147,27 +145,27 @@ function HotelDetails() {
             <HotelMap  specificHotelLocation = {specificHotel?.location} specificHotelName = {specificHotel?.name}/>
           </Link> */}
           <div
-      className={`transition-all duration-300 ${
-        openMap
-          ? "fixed inset-0 z-50 bg-white h-full w-full overflow-hidden"
-          : "h-[200px] w-full overflow-hidden"
-      }`}
-      onClick={handleMapSize}
-    >
-      <HotelMap
-        specificHotelLocation={specificHotel?.location}
-        specificHotelName={specificHotel?.name}
-        fullPage={openMap} // Pass whether it's full-page mode
-      />
-      {openMap && (
-        <button
-          onClick={handleMapSize}
-          className="absolute top-4 right-4 p-2 bg-gray-900 text-white rounded-full z-50"
-        >
-          Close Map
-        </button>
-      )}
-    </div>
+            className={`transition-all duration-300 ${
+              openMap
+                ? "fixed inset-0 z-50 bg-white h-full w-full overflow-hidden"
+                : "h-[200px] w-full overflow-hidden"
+            }`}
+            onClick={handleMapSize}
+          >
+            <HotelMap
+              specificHotelLocation={specificHotel?.location}
+              specificHotelName={specificHotel?.name}
+              fullPage={openMap} // Pass whether it's full-page mode
+            />
+            {openMap && (
+              <button
+                onClick={handleMapSize}
+                className="absolute top-4 right-4 p-2 bg-gray-900 text-white rounded-full z-50"
+              >
+                Close Map
+              </button>
+            )}
+          </div>
         </div>
       </div>
       <div className="bg-gray-900 bg-opacity-90 opacity-80 bg-center bg-cover flex flex-col items-center p-[10px]">
@@ -264,82 +262,85 @@ function HotelDetails() {
           ))}
         </div> */}
         <div className="xs:w-[90%] xs:m-auto md:w-[60%]">
-          
-      {specificHotel?.rooms.map((room, index) => (
+          {specificHotel?.rooms.map((room, index) => (
+            <div
+              key={index}
+              className="flex flex-col md:flex-row my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden"
+            >
+              {/* Room Image */}
+              <div
+                className={`xs:w-full md:w-[40%] bg-cover bg-center ${
+                  room.available ? "" : "opacity-50 filter blur-sm"
+                }`}
+                style={{
+                  backgroundImage: `url("https://bookvialajo.onrender.com/${room.roomImage}")`,
+                  minHeight: "200px",
+                }}
+              >
+                <img
+                  src={`https://bookvialajo.onrender.com/${room.roomImage}`}
+                  alt={`${room.roomName}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-        <div
-          key={index}
-          className="flex flex-col md:flex-row my-4 shadow-lg shadow-gray-900 rounded-[10px] overflow-hidden"
-        >
-          {/* Room Image */}
-          <div
-            className={`xs:w-full md:w-[40%] bg-cover bg-center ${
-              room.available ? "" : "opacity-50 filter blur-sm"
-            }`}
-            style={{
-              backgroundImage: `url("https://bookvialajo.onrender.com/${room.roomImage}")`,
-              minHeight: "200px",
-            }}
-          >
-            <img
-              src={`https://bookvialajo.onrender.com/${room.roomImage}`}
-              alt={`${room.roomName}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Room Details */}
-          <div
-            className={`xs:w-full md:w-[60%] p-[15px] space-y-5 ${
-              room.available ? "bg-white" : "bg-gray-300 bg-opacity-80"
-            }`}
-          >
-            <h1 className="text-2xl font-bold">{room.roomName}</h1>
-            <div>
-              <p
-                className={`text-sm ${
-                  readMore
-                    ? "h-full"
-                    : "overflow-hidden h-[100px] transition-all duration-1000 ease-in-out"
+              {/* Room Details */}
+              <div
+                className={`xs:w-full md:w-[60%] p-[15px] space-y-5 ${
+                  room.available ? "bg-white" : "bg-gray-300 bg-opacity-80"
                 }`}
               >
-                {room.description}
-              </p>
-              <button
-                className="underline text-blue-700 hover:text-blue-900"
-                onClick={() => setReadMore(!readMore)}
-              >
-                {readMore ? "Show Less..." : "Show More..."}
-              </button>
-            </div>
+                <h1 className="text-2xl font-bold">{room.roomName}</h1>
+                <div>
+                  <p
+                    className={`text-sm ${
+                      readMore
+                        ? "h-full"
+                        : "overflow-hidden h-[100px] transition-all duration-1000 ease-in-out"
+                    }`}
+                  >
+                    {room.description}
+                  </p>
+                  <button
+                    className="underline text-blue-700 hover:text-blue-900"
+                    onClick={() => setReadMore(!readMore)}
+                  >
+                    {readMore ? "Show Less..." : "Show More..."}
+                  </button>
+                </div>
 
-            <div className="flex items-center justify-center space-x-2">
-              <p className="text-xl font-light">Capacity:</p>
-              <p className="text-xl font-bold">{room.capacity}</p>
-              <FaPerson className="text-xl" />
-            </div>
+                <div className="flex items-center justify-center space-x-2">
+                  <p className="text-xl font-light">Capacity:</p>
+                  <p className="text-xl font-bold">{room.capacity}</p>
+                  <FaPerson className="text-xl" />
+                </div>
 
-            <p className="text-lg font-semibold">
-              ₦ {new Intl.NumberFormat("en-US").format(room.price)} / Night
-            </p>
-            
-            <p className="font-extrabold text-[24px]">Room {room.available ? "Available" : "not Available"}</p>
-            <button
-              className={`p-[10px] my-[20px] text-white rounded-md w-full ${
-                room.available
-                  ? "bg-gray-900 hover:bg-gray-800"
-                  : "bg-gray-400 cursor-not-allowed"
-              }`}
-              onClick={() => room.available && handleSelection(room)}
-              disabled={!room.available}
-            >
-              {room.available ? "Choose Room" : "Not Available"}
-            </button>
-          </div>
+                <p className="text-lg font-semibold">
+                  ₦ {new Intl.NumberFormat("en-US").format(room.price)} / Night
+                </p>
+
+                <p className="font-extrabold text-[24px]">
+                  Room {room.available ? "Available" : "not Available"}
+                </p>
+                <button
+                  className={`p-[10px] my-[20px] text-white rounded-md w-full ${
+                    room.available
+                      ? "bg-gray-900 hover:bg-gray-800"
+                      : "bg-gray-400 cursor-not-allowed"
+                  }`}
+                  onClick={() => room.available && handleSelection(room)}
+                  disabled={!room.available}
+                >
+                  {room.available ? "Choose Room" : "Not Available"}
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-        <div className="xs:w-full md:w-[40%] sticky top-[100px] h-full " id="booker">
+        <div
+          className="xs:w-full md:w-[40%] sticky top-[100px] h-full "
+          id="booker"
+        >
           <BookRoom hotelName={specificHotel?.name} bookedRoom={bookedRoom} />
         </div>
       </div>
