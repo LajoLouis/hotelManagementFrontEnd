@@ -5,10 +5,10 @@ import { LuMinusCircle } from "react-icons/lu";
 import { FiPlusCircle } from "react-icons/fi";
 import { useContext, useState, useEffect } from "react";
 import HotelContext from "../../context/HotelContext";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function BookRoom({ hotelName, bookedRoom }) {
-  const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart, getBookings, isAuthenticated } = useContext(HotelContext);
+  const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart, getBookings } = useContext(HotelContext);
   const [occupants, setOccupants] = useState(1);
   const [paymentStatus, setPaymentStatus] = useState(false)
   const [loading, setLoading] = useState(false);
@@ -29,9 +29,6 @@ function BookRoom({ hotelName, bookedRoom }) {
 
   const handleRoomBooking = async()=>{
     setLoading(true);
-    if (!isAuthenticated) {
-      return <Navigate to="/login" replace/>
-    }
  
     const room = bookedRoom._id
     try {
@@ -47,11 +44,8 @@ function BookRoom({ hotelName, bookedRoom }) {
       const data = await res.json()
       if (data === "Input checkIn and CheckOut date") {
         showAndHide("error", "Please Input checkIn and checkOut date")
-        return
       }else if (data === "Unauthorized access") {
         showAndHide("error", "Kindly Login")
-        navigate("/bookingpayment")
-        return
         
       }else if (data === "please select a room") {
         showAndHide("error", "Kindly select a room")
