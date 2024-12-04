@@ -44,9 +44,11 @@ function BookRoom({ hotelName, bookedRoom }) {
       const data = await res.json()
       if (data === "Input checkIn and CheckOut date") {
         showAndHide("error", "Please Input checkIn and checkOut date")
+        return
       }else if (data === "Unauthorized access") {
         showAndHide("error", "Kindly Login")
-        navigate("/login");
+        navigate("/bookingpayment")
+        return
         
       }else if (data === "please select a room") {
         showAndHide("error", "Kindly select a room")
