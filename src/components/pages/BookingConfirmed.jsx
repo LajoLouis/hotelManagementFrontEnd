@@ -7,7 +7,7 @@ function BookingConfirmed() {
   const [searchParams] = useSearchParams()
   const tx_ref = searchParams.get("tx_ref")
   const transaction_id = searchParams.get("transaction_id")
-  const {getBookings} = useContext(HotelContext)
+  const {getBookings, getUserProfile} = useContext(HotelContext)
   const createHistory = async (transaction_id, orderId) => {
     try {
       const response = await fetch(
@@ -32,6 +32,7 @@ function BookingConfirmed() {
       }
       setTimeout(() => {
         getBookings()
+        getUserProfile()
       }, 0);
     } catch (error) {
       console.log(error);

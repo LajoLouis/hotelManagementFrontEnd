@@ -58,9 +58,7 @@ function BookingPayment() {
       } else {
         console.error(data.msg || "Failed to intitiate payment");
       }
-      setTimeout(() => {
-        getUserProfile()
-      }, 0);
+      
     } catch (error) {
       console.log(error);
       
