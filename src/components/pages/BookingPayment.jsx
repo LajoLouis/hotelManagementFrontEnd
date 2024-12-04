@@ -12,7 +12,7 @@ function BookingPayment() {
   const { deletebookedRoom, showAndHide, bookingCart, isAuthenticated, getUserProfile } = useContext(HotelContext);
   const [showConfirmation, setShowConfirmation] = useState(false)
   if (!isAuthenticated) {
-    return <Navigate to="/login"/>
+    return <Navigate to="/login" replace/>
   }
 
   useEffect(() => {
@@ -58,7 +58,9 @@ function BookingPayment() {
       } else {
         console.error(data.msg || "Failed to intitiate payment");
       }
-      getUserProfile()
+      setTimeout(() => {
+        getUserProfile()
+      }, 0);
     } catch (error) {
       console.log(error);
       
