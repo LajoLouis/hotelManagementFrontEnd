@@ -30,9 +30,6 @@ function BookRoom({ hotelName, bookedRoom }) {
   const handleRoomBooking = async()=>{
     setLoading(true);
 
-    if (new Date(checkIn) >= new Date(checkOut) ) {
-      return showAndHide("error", "check In must be before check out")
-    }
  
     const room = bookedRoom._id
     try {
