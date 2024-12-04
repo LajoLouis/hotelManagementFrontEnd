@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import HotelContext from '../../context/HotelContext'
 
 function BookingConfirmed() {
   const [searchParams] = useSearchParams()
   const tx_ref = searchParams.get("tx_ref")
   const transaction_id = searchParams.get("transaction_id")
+  const {getBookings} = useContext(HotelContext)
   const createHistory = async (transaction_id, orderId) => {
     try {
       const response = await fetch(
@@ -28,6 +30,9 @@ function BookingConfirmed() {
       } else {
         console.error(data.msg);
       }
+      setTimeout(() => {
+        getBookings()
+      }, 0);
     } catch (error) {
       console.log(error);
     }
