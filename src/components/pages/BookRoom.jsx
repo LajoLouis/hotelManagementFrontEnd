@@ -46,6 +46,7 @@ function BookRoom({ hotelName, bookedRoom }) {
         showAndHide("error", "Please Input checkIn and checkOut date")
       }else if (data === "Unauthorized access") {
         showAndHide("error", "Kindly Login")
+        console.log("unauthorized access");
         
       }else if (data === "please select a room") {
         showAndHide("error", "Kindly select a room")
