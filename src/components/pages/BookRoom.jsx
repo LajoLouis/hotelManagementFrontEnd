@@ -50,8 +50,6 @@ function BookRoom({ hotelName, bookedRoom }) {
       }else if (res.ok) {
         navigate("/bookingpayment");
         console.log("Response Data:", data);
-      } else {
-        showAndHide("error", "Something went wrong. Please try again");
       }
       
       setTimeout(() => {

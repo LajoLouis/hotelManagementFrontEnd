@@ -9,10 +9,6 @@ function StatesHotels() {
   const stateName = params.name;
   const { hotel } = useContext(HotelContext);
   const hotelsInState = hotel.filter((item) => item.state.toLowerCase() === stateName.toLowerCase());
-  const firstHotelImage =
-    hotelsInState.length > 0 ? hotelsInState[0].stateImage : null;
-
-  
   console.log(hotelsInState);
     
 
@@ -22,7 +18,7 @@ function StatesHotels() {
         <div
           className="xs:w-[0%] md:w-[40%] bg-center bg-cover "
           style={{
-            backgroundImage: `url(https://bookvialajo.onrender.com/${firstHotelImage})`,
+            backgroundImage: `url('./images/searchedimage.jpeg')`,
             minHeight: "200px",
           }}
         ></div>
