@@ -5,18 +5,20 @@ import { LuMinusCircle } from "react-icons/lu";
 import { FiPlusCircle } from "react-icons/fi";
 import { useContext, useState, useEffect } from "react";
 import HotelContext from "../../context/HotelContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function BookRoom({ hotelName, bookedRoom }) {
   const { checkIn, checkOut, showAndHide, bookingCart, setBookingCart, handleBookingCart, getBookings } = useContext(HotelContext);
   const [occupants, setOccupants] = useState(1);
   const [paymentStatus, setPaymentStatus] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const checkInDate = new Date(checkIn).getTime();
   const checkOutDate = new Date(checkOut).getTime();
   const duration = checkOutDate - checkInDate;
   const numberOfNights = duration / (1000 * 60 * 60 * 24);
   const bookingDate = new Date().toISOString()
+  const navigate = useNavigate()
 
 
   const totalCost = bookedRoom.price
@@ -26,6 +28,7 @@ function BookRoom({ hotelName, bookedRoom }) {
   const formattedTotalCost = new Intl.NumberFormat('en-US').format(totalCost)
 
   const handleRoomBooking = async()=>{
+    setLoading(true);
  
     const room = bookedRoom._id
     try {
@@ -40,12 +43,15 @@ function BookRoom({ hotelName, bookedRoom }) {
 
       const data = await res.json()
       if (data === "Input checkIn and CheckOut date") {
-        showAndHide("Please Input checkIn and checkOut date")
+        showAndHide("error", "Please Input checkIn and checkOut date")
       }if (data === "Unauthorized access") {
         showAndHide("error", "Kindly Login")
         
-      }else{
-        console.log("Rensponse Data ", data);
+      }else if (res.ok) {
+        navigate("/bookingpayment");
+        console.log("Response Data:", data);
+      } else {
+        showAndHide("error", "Something went wrong. Please try again");
       }
       
       setTimeout(() => {
@@ -55,6 +61,8 @@ function BookRoom({ hotelName, bookedRoom }) {
     } catch (error) {
       console.log(error);
       
+    }finally {
+      setLoading(false);
     }
   }
   
@@ -146,11 +154,9 @@ function BookRoom({ hotelName, bookedRoom }) {
           <p>₦{formattedTotalCost}</p>
         </div>
         <div className="flex justify-center ">
-          <Link to="/bookingpayment">
-          <button className="p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800" onClick={handleRoomBooking} >
-            Add to Booking Cart
+          <button className={`p-[10px] bg-gray-900 text-white rounded-[10px] my-[20px] hover:bg-gray-800 ${loading ? "bg-opacity-80": ""}`} onClick={handleRoomBooking} disabled={loading}>
+            {loading ? "Loading" : "Add to Booking Cart"}
           </button>
-          </Link>
         </div>
       </div>
     </div>
