@@ -44,12 +44,12 @@ function BookRoom({ hotelName, bookedRoom }) {
       const data = await res.json()
       if (data === "Input checkIn and CheckOut date") {
         showAndHide("error", "Please Input checkIn and checkOut date")
-      }else if (data === "Unauthorized access") {
-        showAndHide("error", "Kindly Login")
-        console.log("unauthorized access");
-        
       }else if (data === "please select a room") {
         showAndHide("error", "Kindly select a room")
+        
+      }else if (data.message === "Unauthorized access" || "JsonWebTokenError" || "TokenExpiredError") {
+        showAndHide("error", "Kindly Login")
+        navigate("/login")
         
       }else if (res.ok) {
         navigate("/bookingpayment");
